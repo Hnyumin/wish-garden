@@ -1,0 +1,244 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* ✅ 스크롤 방지 */
+}
+
+canvas {
+  display: block; /* ✅ 캔버스 여백 제거 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+body {
+  font-family: 'Pretendard', sans-serif;
+  background-color: #fefaf3;
+  margin: 0;
+  padding: 0;
+}
+
+#welcome-screen, #wish-screen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#welcome-screen h1 {
+  font-family: 'Josefin Slab', serif;
+  font-weight: 100;
+  font-size: 80px;
+  margin: 40;
+  color: #775b52;
+}
+
+#welcome-screen h2 {
+  font-family: 'Josefin Slab', serif;
+  font-weight: 100;
+  font-size: 180px;
+  margin: 0;
+  color: #775b52;
+}
+
+#welcome-screen button {
+  margin-top: 40px;
+  padding: 15px 35px;
+  font-size: 30px;
+  background-color: #775b52;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Josefin Slab', serif;
+  transition: background 0.3s ease;
+}
+
+#welcome-screen button:hover {
+  background-color: #604a43;
+}
+
+#popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px 30px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  display: none;
+  z-index: 10;
+  font-size: 16px;
+  max-width: 300px;
+  text-align: center;
+}
+
+#popup button {
+  background: #a7a7a7;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+#popup button:hover {
+  background: #b0b0b0; 
+}
+
+#popup-text {
+  font-size: 16px;
+  font-family: 'Josefin Slab', 'Grandiflora One', serif;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.input-row {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+
+#wish-input {
+  width: 400px;
+  height: 500px;
+  padding: 14px 16px;
+  font-size: 18px;
+  font-family: 'Josefin Slab', 'Grandiflora One', serif;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  resize: none;
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.button-stack button {
+  padding: 14px 20px;
+  height: 50px;
+  font-size: 16px;
+  background-color: #775b52;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Josefin Slab', serif;
+  transition: background 0.3s ease;
+}
+
+.button-stack button:hover {
+  background-color: #604a43;
+}
+
+
+.input-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.go-button {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+
+#go-garden-button {
+  padding: 18px 35px;
+  font-size: 25px;
+  background-color: #775b52;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Josefin Slab', serif;
+  margin-top: 20px;
+}
+
+#go-garden-button:hover {
+  background-color: #604a43;
+}
+
+#go-to-garden:hover {
+  background-color: #604a43;
+}
+
+
+#text-wrap {
+  position: relative;
+  z-index: 2;  /* ✅ canvas 위로 올림 */
+  text-align: center;
+  margin-top: 40px;
+}
+
+#text-wrap h1 {
+  font-family: 'Josefin Slab', serif;
+  font-weight: 20;
+  font-size: 70px;
+  margin: 5;
+  color: #775b52;
+}
+
+#text-wrap h2 {
+  font-family: 'Josefin Slab', serif;
+  font-weight: 100;
+  font-size: 250px;
+  color: #775b52;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+#text-wrap p {
+  font-family: 'Josefin Slab', serif;
+  font-weight: 100;
+  font-size: 25px;
+  margin-top: 0px;
+  color: #555;
+}
+
+.plant-button {
+  position: absolute;
+  right: -130px; /* 조절 가능 */
+  top: 485px;
+  bottom: 0;
+}
+
+
+#wish-button {
+  padding: 14px 20px;
+  font-size: 16px;
+  background-color: #775b52;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Josefin Slab', serif;
+}
+
+#wish-button:hover{
+  background-color: #604a43;
+}
+
+body, button, a, textarea {
+  cursor: url('cursor.svg') 8 8, auto;
+}
