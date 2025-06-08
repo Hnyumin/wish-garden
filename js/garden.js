@@ -140,7 +140,7 @@ class Flower {
   drawFlower(type) {
     if (flowerImages[type]) {
       imageMode(CENTER);
-      image(flowerImages[type], 0, 0, 200, 170);
+      image(flowerImages[type], 0, 0); // 크기 지정 없이 렌더링
     } else {
       fill('#aaa');
       ellipse(0, 0, 60);
@@ -167,7 +167,7 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(16, 24);
-    this.alpha = 255;
+   this.alpha -= 5; // 기존보다 빠르게 사라지게
     this.speed = random(0.5, 1.2);
   }
 
@@ -186,6 +186,6 @@ class Particle {
   }
 
   isDead() {
-    return this.alpha <= 0 || this.y < -30;
+    return this.alpha <= 0 || this.y < -50;
   }
 }
