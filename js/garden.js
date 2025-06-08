@@ -101,7 +101,7 @@ function closePopup() {
 class Flower {
   constructor(x, maxHeight, wish, type = 0) {
     this.x = x;
-    this.baseY = height - random(40, 200); // 🌟 줄기 시작점 랜덤
+    this.baseY = random(height - 200, height - 100); // 🌟 줄기 시작점 랜덤
     this.height = 0;
     this.maxHeight = maxHeight;
     this.wish = wish;
