@@ -240,5 +240,5 @@ body {
 }
 
 body, button, a, textarea {
-  cursor: url('../img/cursor.png') 8 8, auto;
+  cursor: url('../img/cursor.svg') 8 8, auto;
 }
