@@ -37,6 +37,7 @@ function setup() {
     let x = map(i, 0, flowerCount - 1, 80, width - 80);
     availableX.push(x);
   }
+   currentIndex = 0; // ✅ 꽃 다시 자라게!
 }
 
 function draw() {
@@ -194,7 +195,7 @@ class Particle {
     pop();
   }
 
-  isDead() {
-    return this.alpha <= 0;
-  }
+ isDead() {
+  return this.alpha <= 0 || this.y < 0;
+ }
 }
