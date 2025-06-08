@@ -20,6 +20,8 @@ function setup() {
   const input = select('#wish-input');
   const button = select('#wish-button');
   const goButton = select('#go-garden-button');
+  const enterButton = select('.enter-button');
+enterButton.mousePressed((e) => enterGarden({ target: e.target }));
 goButton.mousePressed((e) => goToGarden({ target: e.target }));
 
   input.elt.addEventListener('keydown', (e) => {
