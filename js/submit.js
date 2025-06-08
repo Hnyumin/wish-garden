@@ -162,3 +162,6 @@ function goToGarden(event) {
     window.location.href = "garden.html";
   }, 1300);
 }
+
+window.enterGarden = enterGarden;
+window.goToGarden = goToGarden;
