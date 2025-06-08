@@ -34,7 +34,7 @@ goButton.mousePressed((e) => goToGarden({ target: e.target }));
 }
 
 function draw() {
-  clear();
+  background(0, 0); // 투명 배경으로 초기화
 
   if (animStarted) {
     for (let p of particles) {
@@ -44,7 +44,7 @@ function draw() {
 
     if (millis() - animStartTime > 1300) {
       animStarted = false;
-      particles = []; // 🌱 파티클 배열 비우기
+      particles = []; // ✅ 파티클 완전히 제거
       document.getElementById("welcome-screen").style.display = "none";
       document.getElementById("wish-screen").style.display = "block";
       noLoop(); // ✅ draw 루프 중단
