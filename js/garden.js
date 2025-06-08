@@ -9,25 +9,23 @@ let wishes = [];
 let currentIndex = 0;
 
 const stemColors = [
-  '#bcf660', // type 0: 건강
-  '#ffff00', // type 1: 재물
-  '#ff7fc2', // type 2: 사랑
-  '#ff9058', // type 3: 관계
-  '#4dbbff'  // type 4: 성장
+  '#bcf660', // 건강
+  '#ffff00', // 재물
+  '#ff7fc2', // 사랑
+  '#ff9058', // 관계
+  '#4dbbff'  // 성장
 ];
 
 function preload() {
   for (let i = 0; i < 5; i++) {
-    flowerImages[i] = loadImage(`img/flower_${i}.svg`);
+    flowerImages[i] = loadImage("img/flower_" + i + ".svg");
   }
   grassImg = loadImage("img/grass.svg");
   circleImg = loadImage("img/circle.svg");
 }
 
 function setup() {
-  let c = createCanvas(window.innerWidth, window.innerHeight);
-  c.position(0, 0); // 브라우저 좌측 상단 고정
-  c.style('display', 'block'); // 여백 제거
+  createCanvas(windowWidth, windowHeight);
   textAlign(CENTER, CENTER);
   textSize(14);
 
@@ -37,42 +35,34 @@ function setup() {
     let x = map(i, 0, flowerCount - 1, 80, width - 80);
     availableX.push(x);
   }
-   currentIndex = 0; // ✅ 꽃 다시 자라게!
+  currentIndex = 0;
 }
 
 function draw() {
-  clear();  // 이전 프레임 삭제
-
-  // 배경색 채우기
   background('#fefaf3');
 
   imageMode(CORNER);
-  image(grassImg, 0, height - 120 - 90, width, 208);
+  image(grassImg, 0, height - 120 - 90, width, 208); // 위로 살짝 올림
 
   for (let f of flowers) {
     f.update();
     f.display();
   }
 }
-function windowResized() {
-  resizeCanvas(window.innerWidth, window.innerHeight);
-}
 
 function mousePressed() {
   wishes = getWishes();
   if (!wishes || wishes.length === 0) return;
 
-  let clickedOnFlower = false;
   for (let f of flowers) {
     let d = dist(mouseX, mouseY, f.x, f.baseY - f.height);
     if (d < 40) {
       f.checkClick(mouseX, mouseY);
-      clickedOnFlower = true;
-      break;
+      return;
     }
   }
 
-  if (!clickedOnFlower && currentIndex < wishes.length && availableX.length > 0) {
+  if (currentIndex < wishes.length && availableX.length > 0) {
     let index = floor(random(availableX.length));
     let x = availableX[index];
     availableX.splice(index, 1);
@@ -101,7 +91,7 @@ function closePopup() {
 class Flower {
   constructor(x, maxHeight, wish, type = 0) {
     this.x = x;
-    this.baseY = random(height - 200, height - 100); // 🌟 줄기 시작점 랜덤
+    this.baseY = random(height - 280, height - 180); // 🌱 텍스트 아래로만 제한
     this.height = 0;
     this.maxHeight = maxHeight;
     this.wish = wish;
@@ -116,7 +106,7 @@ class Flower {
       this.height += this.growSpeed;
     } else if (!this.hasBloomed) {
       for (let i = 0; i < 3; i++) {
-        let offsetX = random(-30, 30); // 겹치지 않게 위치 흩어짐
+        let offsetX = random(-30, 30);
         let offsetY = random(-10, 10);
         this.particles.push(new Particle(this.x + offsetX, this.baseY - this.maxHeight + offsetY));
       }
@@ -126,6 +116,7 @@ class Flower {
     for (let p of this.particles) {
       p.update();
     }
+
     this.particles = this.particles.filter(p => !p.isDead());
   }
 
@@ -159,15 +150,12 @@ class Flower {
   checkClick(mx, my) {
     const flowerWidth = 100;
     const flowerHeight = 100;
-
     const flowerX = this.x - flowerWidth / 2;
     const flowerY = this.baseY - this.height - flowerHeight / 2;
 
     if (
-      mx >= flowerX &&
-      mx <= flowerX + flowerWidth &&
-      my >= flowerY &&
-      my <= flowerY + flowerHeight
+      mx >= flowerX && mx <= flowerX + flowerWidth &&
+      my >= flowerY && my <= flowerY + flowerHeight
     ) {
       openPopup(this.wish);
     }
@@ -179,13 +167,13 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(16, 24);
-    this.alpha -= 4;
+    this.alpha = 255;
     this.speed = random(0.5, 1.2);
   }
 
   update() {
     this.y -= this.speed;
-    this.alpha -= 1.2; // 💨 느리게 사라짐
+    this.alpha -= 2; // 천천히 사라짐
   }
 
   display() {
@@ -197,7 +185,7 @@ class Particle {
     pop();
   }
 
- isDead() {
-  return this.alpha <= 0 || this.y < 0;
- }
+  isDead() {
+    return this.alpha <= 0 || this.y < -30;
+  }
 }
