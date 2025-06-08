@@ -6,7 +6,7 @@ let clickX = 0;
 let clickY = 0;
 
 function preload() {
-  circleImg = loadImage("circle.svg");
+  circleImg = loadImage("img/circle.svg");
 }
 
 function setup() {
