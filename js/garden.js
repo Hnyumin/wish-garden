@@ -41,17 +41,19 @@ function setup() {
 }
 
 function draw() {
+  clear();  // 이전 프레임 삭제
+
+  // 배경색 채우기
   background('#fefaf3');
 
   imageMode(CORNER);
-  image(grassImg, 0, height - 120 - 90, width, 208); // ✅ +20만큼 위로 올림
+  image(grassImg, 0, height - 120 - 90, width, 208);
 
   for (let f of flowers) {
     f.update();
     f.display();
   }
 }
-
 function windowResized() {
   resizeCanvas(window.innerWidth, window.innerHeight);
 }
@@ -177,7 +179,7 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(16, 24);
-    this.alpha = 255;
+    this.alpha -= 4;
     this.speed = random(0.5, 1.2);
   }
 
