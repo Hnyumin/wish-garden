@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <title>소원 입력</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- CSS 경로 수정 -->
+  <link rel="stylesheet" href="css/style.css" />
+
   <!-- 영문 서체 -->
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;700&display=swap" rel="stylesheet">
+
   <!-- 한글 서체 -->
   <link href="https://fonts.googleapis.com/css2?family=Grandiflora+One&display=swap" rel="stylesheet">
+
+  <!-- p5.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
 </head>
 <body>
@@ -18,10 +24,11 @@
     <button class="enter-button" onclick="enterGarden(event)">Enter</button>
   </div>
 
+  <!-- 소원 입력 화면 -->
   <div id="wish-screen" style="display: none;">
     <div class="input-wrapper">
       <div class="input-column">
-        
+
         <!-- 텍스트박스 + plant버튼 나란히 -->
         <div class="input-row">
           <textarea id="wish-input" placeholder="Tell me your WISH..."></textarea>
@@ -29,23 +36,23 @@
             <button id="wish-button">Plant Wish</button>
           </div>
         </div>
-        
+
         <!-- go garden 버튼은 아래쪽 중앙 -->
         <div class="go-button">
-            <button id="go-garden-button" onclick="goToGarden(event)">Go to Wish Garden</button>
-          </a>
+          <button id="go-garden-button" onclick="goToGarden(event)">Go to Wish Garden</button>
         </div>
-  
+
       </div>
     </div>
   </div>
 
-    <div id="popup">
-      <div id="popup-text"></div>
-      <button onclick="closePopup()">Close</button>
-    </div>
+  <!-- 팝업 -->
+  <div id="popup">
+    <div id="popup-text"></div>
+    <button onclick="closePopup()">Close</button>
   </div>
 
-  <script src="submit.js"></script>
+  <!-- JS 경로 수정 -->
+  <script src="js/submit.js"></script>
 </body>
 </html>
