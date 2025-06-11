@@ -137,16 +137,20 @@ class Flower {
     }
   }
 
-   drawFlower(type) {
-    if (flowerImages[type]) {
-      imageMode(CENTER);
-      image(flowerImages[type], 0, 0, 100, 85);
-    } else {
-      fill('#aaa');
-      ellipse(0, 0, 60);
-    }
-  }
+ drawFlower(type) {
+  if (flowerImages[type]) {
+    imageMode(CENTER);
 
+    // 화면 너비의 12%, 높이의 10% 비율로 그림
+    let flowerW = width * 0.12;
+    let flowerH = height * 0.10;
+
+    image(flowerImages[type], 0, 0, flowerW, flowerH);
+  } else {
+    fill('#aaa');
+    ellipse(0, 0, 60);
+  }
+}
   checkClick(mx, my) {
     const flowerWidth = 100;
     const flowerHeight = 100;
