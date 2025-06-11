@@ -18,7 +18,7 @@ const stemColors = [
 
 function preload() {
   for (let i = 0; i < 5; i++) {
-    flowerImages[i] = loadImage("img/flower_" + i + ".svg");
+    flowerImages[i] = loadImage("img/flower_" + i + ".png");
   }
   grassImg = loadImage("img/grass.svg");
   circleImg = loadImage("img/circle.svg");
