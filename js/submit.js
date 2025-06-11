@@ -12,9 +12,8 @@ function setup() {
   c.position(0, 0);
   c.style('pointer-events', 'none');
   c.style('z-index', '999');
-  noLoop(); // draw 수동
+  noLoop();
 
-  // 버튼 처리
   const input = select('#wish-input');
   const button = select('#wish-button');
   const goButton = select('#go-garden-button');
@@ -32,16 +31,15 @@ function setup() {
 }
 
 function draw() {
-  clear(); // 💡 캔버스 초기화
+  clear();
+
   if (animStarted) {
     for (let p of particles) {
       p.update();
       p.display();
     }
-
     particles = particles.filter(p => !p.isDead());
 
-    // 🌟 Enter 버튼용 전환 처리
     if (millis() - animStartTime > 1300) {
       if (document.getElementById("welcome-screen").style.display !== "none") {
         document.getElementById("welcome-screen").style.display = "none";
@@ -57,7 +55,6 @@ function enterGarden(event) {
   const rect = event.target.getBoundingClientRect();
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
-
   triggerParticles(x, y);
   loop();
 }
@@ -84,7 +81,6 @@ function goToGarden(event) {
   const rect = event.target.getBoundingClientRect();
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
-
   triggerParticles(x, y);
   loop();
 
@@ -100,7 +96,6 @@ function triggerParticles(x, y) {
   particles = [];
   animStarted = true;
   animStartTime = millis();
-
   for (let i = 0; i < 4; i++) {
     particles.push(new Particle(x + random(-30, 30), y + random(-20, 20)));
   }
@@ -111,13 +106,13 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(15, 25);
-    this.alpha = 255; // 💡 초기값 제대로 설정!
+    this.alpha = 255;
     this.speed = random(0.5, 1.5);
   }
 
   update() {
     this.y -= this.speed;
-    this.alpha -= 3; // 💨 빠르게 사라짐
+    this.alpha -= 3;
   }
 
   display() {
