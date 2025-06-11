@@ -96,7 +96,7 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(15, 25);
-    this.alpha = 255;
+    this.alpha -= 5; // 더 빠르게 사라지게 하기 (기존: 2)
     this.speed = random(0.5, 1.5);
   }
 
