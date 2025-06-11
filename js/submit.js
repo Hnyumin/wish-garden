@@ -2,8 +2,6 @@ let particles = [];
 let animStarted = false;
 let animStartTime = 0;
 let circleImg;
-let clickX = 0;
-let clickY = 0;
 
 function preload() {
   circleImg = loadImage("img/circle.svg");
@@ -14,41 +12,42 @@ function setup() {
   c.position(0, 0);
   c.style('pointer-events', 'none');
   c.style('z-index', '999');
-  noLoop(); // draw 수동 실행
+  noLoop(); // draw 수동
 
-  // 입력 처리
+  // 버튼 처리
   const input = select('#wish-input');
   const button = select('#wish-button');
   const goButton = select('#go-garden-button');
   const enterButton = select('.enter-button');
-enterButton.mousePressed((e) => enterGarden({ target: e.target }));
-goButton.mousePressed((e) => goToGarden({ target: e.target }));
+
+  enterButton.mousePressed((e) => enterGarden(e));
+  goButton.mousePressed((e) => goToGarden(e));
+  button.mousePressed((e) => plantWish(e));
 
   input.elt.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       plantWish({ target: button.elt });
     }
   });
-
-  button.mousePressed((e) => plantWish({ target: e.target }));
 }
 
 function draw() {
-  background(0, 0); // 투명 배경
-
+  clear(); // 💡 캔버스 초기화
   if (animStarted) {
     for (let p of particles) {
       p.update();
       p.display();
     }
 
-    // ❗ 죽은 파티클 제거
     particles = particles.filter(p => !p.isDead());
 
+    // 🌟 Enter 버튼용 전환 처리
     if (millis() - animStartTime > 1300) {
+      if (document.getElementById("welcome-screen").style.display !== "none") {
+        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("wish-screen").style.display = "block";
+      }
       animStarted = false;
-      document.getElementById("welcome-screen").style.display = "none";
-      document.getElementById("wish-screen").style.display = "block";
       noLoop();
     }
   }
@@ -60,7 +59,7 @@ function enterGarden(event) {
   const y = rect.top + rect.height / 2;
 
   triggerParticles(x, y);
-  loop(); // draw 시작
+  loop();
 }
 
 function plantWish(event) {
@@ -68,19 +67,33 @@ function plantWish(event) {
   const wishText = input.value.trim();
   if (!wishText) return;
 
-  // 소원 저장
   let wishes = getWishes();
   let flowerType = assignFlowerType(wishText);
   wishes.push({ text: wishText, type: flowerType, timestamp: Date.now() });
   localStorage.setItem("wishes", JSON.stringify(wishes));
   input.value = "";
 
-  // 클릭 위치에서 효과 실행
   const rect = event.target.getBoundingClientRect();
   const x = rect.left + rect.width / 2;
   const y = rect.top + rect.height / 2;
   triggerParticles(x, y);
-  loop(); // draw 시작
+  loop();
+}
+
+function goToGarden(event) {
+  const rect = event.target.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+
+  triggerParticles(x, y);
+  loop();
+
+  setTimeout(() => {
+    clear();
+    noLoop();
+    particles = [];
+    window.location.href = "garden.html";
+  }, 1300);
 }
 
 function triggerParticles(x, y) {
@@ -98,13 +111,13 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(15, 25);
-    this.alpha -= 5; // 더 빠르게 사라지게 하기 (기존: 2)
+    this.alpha = 255; // 💡 초기값 제대로 설정!
     this.speed = random(0.5, 1.5);
   }
 
   update() {
     this.y -= this.speed;
-    this.alpha -= 2;
+    this.alpha -= 3; // 💨 빠르게 사라짐
   }
 
   display() {
@@ -115,6 +128,10 @@ class Particle {
     image(circleImg, this.x, this.y, this.size, this.size);
     pop();
   }
+
+  isDead() {
+    return this.alpha <= 0 || this.y < -50;
+  }
 }
 
 function getWishes() {
@@ -124,47 +141,19 @@ function getWishes() {
 
 function assignFlowerType(text) {
   text = text.toLowerCase();
-
   const categories = [
     { type: 0, keywords: ["건강", "회복", "병", "치유", "운동", "활력", "아프", "낫게"] },
     { type: 1, keywords: ["돈", "부자", "재산", "월급", "복권", "사업"] },
-    { type: 2, keywords: ["사랑", "연애", "결혼", "마음", "고백", "짝사랑", "사귀", "보고", "콘서트", "팬미팅", "공연",] },
+    { type: 2, keywords: ["사랑", "연애", "결혼", "마음", "고백", "짝사랑", "사귀", "콘서트", "공연", "팬미팅"] },
     { type: 3, keywords: ["가족", "친구", "관계", "부모", "아이", "소통", "인간관계", "화해"] },
     { type: 4, keywords: ["성장", "꿈", "목표", "공부", "성공", "노력", "개발", "자기"] }
   ];
-
   for (let category of categories) {
     for (let keyword of category.keywords) {
       if (text.includes(keyword)) return category.type;
     }
   }
-
   return Math.floor(Math.random() * 5);
-}
-
-function goToGarden(event) {
-  const rect = event.target.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
-  const y = rect.top + rect.height / 2;
-
-  triggerParticles(x, y);
-  loop(); // draw() 시작
-
-  animStarted = true;
-  animStartTime = millis();
-
-  particles = [];
-  for (let i = 0; i < 4; i++) {
-    particles.push(new Particle(x + random(-30, 30), y + random(-20, 20)));
-  }
-
-  // ✅ 1.3초 후에 화면 정리 후 페이지 전환
-  setTimeout(() => {
-    clear();          // ✨ 캔버스를 완전히 지움
-    noLoop();         // ✨ draw 중지
-    particles = [];   // ✨ 배열 비움 (혹시 몰라서)
-    window.location.href = "garden.html";
-  }, 1300);
 }
 
 window.enterGarden = enterGarden;
