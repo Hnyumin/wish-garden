@@ -138,14 +138,18 @@ class Flower {
   }
 
   drawFlower(type) {
-    if (flowerImages[type]) {
-      imageMode(CENTER);
-      image(flowerImages[type], 0, 0); // 크기 지정 없이 렌더링
-    } else {
-      fill('#aaa');
-      ellipse(0, 0, 60);
-    }
+  if (flowerImages[type]) {
+    imageMode(CENTER);
+
+    let flowerW = width * 0.1;   // 화면 너비의 10%
+    let flowerH = height * 0.1;  // 화면 높이의 10%
+
+    image(flowerImages[type], 0, 0, flowerW, flowerH);
+  } else {
+    fill('#aaa');
+    ellipse(0, 0, 60);
   }
+}
 
   checkClick(mx, my) {
     const flowerWidth = 100;
