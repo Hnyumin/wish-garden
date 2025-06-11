@@ -141,8 +141,8 @@ class Flower {
   if (flowerImages[type]) {
     imageMode(CENTER);
 
-    let flowerW = width * 0.1;   // 화면 너비의 10%
-    let flowerH = height * 0.1;  // 화면 높이의 10%
+    let flowerW = width * 0.01;   // 화면 너비의 10%
+    let flowerH = height * 0.01;  // 화면 높이의 10%
 
     image(flowerImages[type], 0, 0, flowerW, flowerH);
   } else {
