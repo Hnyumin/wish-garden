@@ -4,44 +4,38 @@
   <meta charset="UTF-8" />
   <title>소원 입력</title>
 
-  <!-- CSS 경로 수정 -->
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- 영문 서체 -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- 한글 서체 -->
   <link href="https://fonts.googleapis.com/css2?family=Grandiflora+One&display=swap" rel="stylesheet">
 
   <!-- p5.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <!-- submit.js는 나중에 로딩 -->
 </head>
 <body>
-  <!-- 인트로 화면 -->
+  <!-- 인트로 -->
   <div id="welcome-screen">
     <h1>Welcome to</h1>
     <h2>WISH GARDEN</h2>
     <button class="enter-button" onclick="enterGarden(event)">Enter</button>
   </div>
 
-  <!-- 소원 입력 화면 -->
+  <!-- 소원 입력 -->
   <div id="wish-screen" style="display: none;">
     <div class="input-wrapper">
       <div class="input-column">
-
-        <!-- 텍스트박스 + plant버튼 나란히 -->
         <div class="input-row">
           <textarea id="wish-input" placeholder="Tell me your WISH..."></textarea>
           <div class="plant-button">
             <button id="wish-button">Plant Wish</button>
           </div>
         </div>
-
-        <!-- go garden 버튼은 아래쪽 중앙 -->
         <div class="go-button">
           <button id="go-garden-button" onclick="goToGarden(event)">Go to Wish Garden</button>
         </div>
-
       </div>
     </div>
   </div>
@@ -52,7 +46,7 @@
     <button onclick="closePopup()">Close</button>
   </div>
 
-  <!-- JS 경로 수정 -->
+  <!-- JS 마지막에 로딩 -->
   <script src="js/submit.js"></script>
 </body>
 </html>
