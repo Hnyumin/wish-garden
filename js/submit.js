@@ -34,7 +34,7 @@ goButton.mousePressed((e) => goToGarden({ target: e.target }));
 }
 
 function draw() {
-  clear(); // 캔버스를 완전히 투명하게 초기화
+  background(0, 0); // 투명 배경
 
   if (animStarted) {
     for (let p of particles) {
@@ -42,9 +42,11 @@ function draw() {
       p.display();
     }
 
+    // ❗ 죽은 파티클 제거
+    particles = particles.filter(p => !p.isDead());
+
     if (millis() - animStartTime > 1300) {
       animStarted = false;
-      particles = [];
       document.getElementById("welcome-screen").style.display = "none";
       document.getElementById("wish-screen").style.display = "block";
       noLoop();
