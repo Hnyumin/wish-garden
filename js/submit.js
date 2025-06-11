@@ -34,7 +34,7 @@ goButton.mousePressed((e) => goToGarden({ target: e.target }));
 }
 
 function draw() {
-  background(0, 0); // 투명 배경으로 초기화
+  clear(); // 캔버스를 완전히 투명하게 초기화
 
   if (animStarted) {
     for (let p of particles) {
@@ -44,10 +44,10 @@ function draw() {
 
     if (millis() - animStartTime > 1300) {
       animStarted = false;
-      particles = []; // ✅ 파티클 완전히 제거
+      particles = [];
       document.getElementById("welcome-screen").style.display = "none";
       document.getElementById("wish-screen").style.display = "block";
-      noLoop(); // ✅ draw 루프 중단
+      noLoop();
     }
   }
 }
@@ -126,7 +126,7 @@ function assignFlowerType(text) {
   const categories = [
     { type: 0, keywords: ["건강", "회복", "병", "치유", "운동", "활력", "아프", "낫게"] },
     { type: 1, keywords: ["돈", "부자", "재산", "월급", "복권", "사업"] },
-    { type: 2, keywords: ["사랑", "연애", "결혼", "마음", "고백", "짝사랑", "사귀"] },
+    { type: 2, keywords: ["사랑", "연애", "결혼", "마음", "고백", "짝사랑", "사귀", "보고", "콘서트", "팬미팅", "공연",] },
     { type: 3, keywords: ["가족", "친구", "관계", "부모", "아이", "소통", "인간관계", "화해"] },
     { type: 4, keywords: ["성장", "꿈", "목표", "공부", "성공", "노력", "개발", "자기"] }
   ];
