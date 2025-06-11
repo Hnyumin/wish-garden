@@ -148,19 +148,21 @@ function goToGarden(event) {
   const y = rect.top + rect.height / 2;
 
   triggerParticles(x, y);
-  loop(); // ✅ 이 줄을 꼭 추가해야 draw()가 실행돼!
+  loop(); // draw() 시작
 
   animStarted = true;
   animStartTime = millis();
 
-  // 기존 파티클 초기화 및 생성
   particles = [];
   for (let i = 0; i < 4; i++) {
     particles.push(new Particle(x + random(-30, 30), y + random(-20, 20)));
   }
 
-  // 1.3초 후 페이지 이동
+  // ✅ 1.3초 후에 화면 정리 후 페이지 전환
   setTimeout(() => {
+    clear();          // ✨ 캔버스를 완전히 지움
+    noLoop();         // ✨ draw 중지
+    particles = [];   // ✨ 배열 비움 (혹시 몰라서)
     window.location.href = "garden.html";
   }, 1300);
 }
