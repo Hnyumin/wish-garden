@@ -74,6 +74,11 @@ function mousePressed() {
   }
 }
 
+function touchStarted() {
+  mousePressed(); // 터치도 마우스처럼 처리
+  return false;   // 모바일 기본 스크롤 방지
+}
+
 function getWishes() {
   let data = localStorage.getItem("wishes");
   return data ? JSON.parse(data) : [];
