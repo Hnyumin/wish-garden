@@ -29,22 +29,23 @@ function setup() {
   textAlign(CENTER, CENTER);
   textSize(14);
 
-  wishes = getWishes();
-  let flowerCount = wishes.length || 20;
- let margin = 80;
-let lastX = margin;
+wishes = getWishes();
+let flowerCount = wishes.length || 20;
+
+let margin = 80;
+let availableSpace = width - margin * 2;
+let currentX = margin + random(0, 30); // 시작 위치를 살짝 랜덤하게
 
 for (let i = 0; i < flowerCount; i++) {
-  let gap = random(40, 200); // 간격을 40~100 사이로 랜덤 설정
-  let x = lastX + gap;
+  let gap = random(60, 120); // 간격은 충분히 벌려주기
 
-  // 너무 오른쪽으로 나가면 멈춰
-  if (x > width - margin) break;
+  if (currentX > width - margin) break;
 
-  availableX.push(x);
-  lastX = x;
+  availableX.push(currentX);
+  currentX += gap;
 }
-  currentIndex = 0;
+
+currentIndex = 0;
 }
 
 function draw() {
