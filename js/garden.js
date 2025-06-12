@@ -33,13 +33,23 @@ wishes = getWishes();
 let flowerCount = wishes.length || 20;
 
 let margin = 80;
-let currentX = margin;
+let usedX = new Set();
 
-for (let i = 0; i < flowerCount; i++) {
-  let x = random(margin, width - margin);
-  availableX.push(x);
-}
-currentIndex = 0;
+while (availableX.length < flowerCount) {
+  let x = floor(random(margin, width - margin));
+
+  // 비슷한 x값이 이미 있는지 확인 (간격 60 이상 유지)
+  let tooClose = false;
+  for (let existing of availableX) {
+    if (abs(existing - x) < 60) {
+      tooClose = true;
+      break;
+    }
+  }
+
+  if (!tooClose) {
+    availableX.push(x);
+  }
 }
 
 function draw() {
