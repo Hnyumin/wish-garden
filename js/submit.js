@@ -138,7 +138,7 @@ function assignFlowerType(text) {
   text = text.toLowerCase();
   const categories = [
     { type: 0, keywords: ["건강", "회복", "병", "치유", "운동", "활력", "아프", "낫게"] },
-    { type: 1, keywords: ["돈", "부자", "재산", "월급", "복권", "사업"] },
+    { type: 1, keywords: ["돈", "부자", "재산", "월급", "복권", "사업", "로또"] },
     { type: 2, keywords: ["사랑", "연애", "결혼", "마음", "고백", "짝사랑", "사귀", "콘서트", "공연", "팬미팅"] },
     { type: 3, keywords: ["가족", "친구", "관계", "부모", "아이", "소통", "인간관계", "화해"] },
     { type: 4, keywords: ["성장", "꿈", "목표", "공부", "성공", "노력", "개발", "자기"] }
