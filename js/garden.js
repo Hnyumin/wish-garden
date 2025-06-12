@@ -33,16 +33,17 @@ wishes = getWishes();
 let flowerCount = wishes.length || 20;
 
 let margin = 80;
-let availableSpace = width - margin * 2;
-let currentX = margin + random(0, 30); // 시작 위치를 살짝 랜덤하게
+let currentX = margin;
 
 for (let i = 0; i < flowerCount; i++) {
-  let gap = random(60, 120); // 간격은 충분히 벌려주기
+  // gap을 작게 잡지 말고 좀 크게
+  let gap = random(100, 160);
+  currentX += gap;
 
+  // 화면 우측 여백 넘으면 그만
   if (currentX > width - margin) break;
 
   availableX.push(currentX);
-  currentX += gap;
 }
 
 currentIndex = 0;
