@@ -35,7 +35,7 @@ function setup() {
 let lastX = margin;
 
 for (let i = 0; i < flowerCount; i++) {
-  let gap = random(40, 100); // 간격을 40~100 사이로 랜덤 설정
+  let gap = random(40, 200); // 간격을 40~100 사이로 랜덤 설정
   let x = lastX + gap;
 
   // 너무 오른쪽으로 나가면 멈춰
