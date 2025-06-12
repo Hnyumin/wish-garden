@@ -33,25 +33,19 @@ wishes = getWishes();
 let flowerCount = wishes.length || 20;
 
 let margin = 80;
-let usedX = new Set();
+let currentX = margin;
 
-while (availableX.length < flowerCount) {
-  let x = floor(random(margin, width - margin));
+for (let i = 0; i < flowerCount; i++) {
+  // gap을 작게 잡지 말고 좀 크게
+  let gap = random(100, 160);
+  currentX += gap;
 
-  // 비슷한 x값이 이미 있는지 확인 (간격 60 이상 유지)
-  let tooClose = false;
-  for (let existing of availableX) {
-    if (abs(existing - x) < 60) {
-      tooClose = true;
-      break;
-    }
-  }
+  // 화면 우측 여백 넘으면 그만
+  if (currentX > width - margin) break;
 
-  if (!tooClose) {
-    availableX.push(x);
-  }
+  availableX.push(currentX);
 }
-
+}
 function draw() {
   background('#fefaf3');
 
