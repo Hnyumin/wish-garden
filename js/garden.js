@@ -79,6 +79,11 @@ function touchStarted() {
   return false;   // 모바일 기본 스크롤 방지
 }
 
+function touchEnded() {
+  mousePressed(); // 터치 끝났을 때도 처리
+  return false;
+}
+
 function getWishes() {
   let data = localStorage.getItem("wishes");
   return data ? JSON.parse(data) : [];
