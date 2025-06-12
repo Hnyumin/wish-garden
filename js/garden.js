@@ -36,16 +36,9 @@ let margin = 80;
 let currentX = margin;
 
 for (let i = 0; i < flowerCount; i++) {
-  // gap을 작게 잡지 말고 좀 크게
-  let gap = random(100, 160);
-  currentX += gap;
-
-  // 화면 우측 여백 넘으면 그만
-  if (currentX > width - margin) break;
-
-  availableX.push(currentX);
+  let x = random(margin, width - margin);
+  availableX.push(x);
 }
-
 currentIndex = 0;
 }
 
