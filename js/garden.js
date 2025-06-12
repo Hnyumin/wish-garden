@@ -143,7 +143,7 @@ class Flower {
 
     // 화면 너비의 12%, 높이의 10% 비율로 그림
     let flowerW = width * 0.12;
-    let flowerH = height * 0.18;
+    let flowerH = height * 0.2;
 
     image(flowerImages[type], 0, 0, flowerW, flowerH);
   } else {
