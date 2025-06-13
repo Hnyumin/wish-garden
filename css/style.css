@@ -240,5 +240,4 @@ body {
 }
 
 body, button, a, textarea {
-  cursor: url('/wish-garden/img/cursor.png') 8 8, auto;
-}
+ cursor: url('https://hnyumin.github.io/wish-garden/img/cursor.png') 8 8, auto;
