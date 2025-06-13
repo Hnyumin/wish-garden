@@ -240,5 +240,5 @@ body {
 }
 
 html, body, * {
-  cursor: url('cursor: url('https://hnyumin.github.io/wish-garden/img/cursor.png') 8 8, auto !important;
+  cursor: url('cursor: url('/wish-garden/img/cursor.png') 8 8, auto;') 8 8, auto !important;
 }
