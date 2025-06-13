@@ -27,7 +27,7 @@ function setup() {
 
   // ✅ 커서 이미지 적용
   let c = document.querySelector('canvas');
-  c.style.cursor = "url('https://hnyumin.github.io/wish-garden/img/cursor.png') 8 8, auto";
+  c.style.cursor = "url('/wish-garden/img/cursor.png') 8 8, auto";
 
   textAlign(CENTER, CENTER);
   textSize(14);
