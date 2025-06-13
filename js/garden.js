@@ -1,5 +1,3 @@
-// 🌼 전체 코드: 줄기 시작점 랜덤 + circle.svg 효과 느리게 + 겹치지 않게 + grass 위치 수정 완료
-
 let flowerImages = [];
 let grassImg;
 let circleImg;
@@ -26,31 +24,32 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  // ✅ 커서 이미지 적용
+  let c = document.querySelector('canvas');
+  c.style.cursor = "url('https://hnyumin.github.io/wish-garden/img/cursor.png') 8 8, auto";
+
   textAlign(CENTER, CENTER);
   textSize(14);
 
-wishes = getWishes();
-let flowerCount = wishes.length || 20;
+  wishes = getWishes();
+  let flowerCount = wishes.length || 20;
 
-let margin = 80;
-let currentX = margin;
+  let margin = 80;
+  let currentX = margin;
 
-for (let i = 0; i < flowerCount; i++) {
-  // gap을 작게 잡지 말고 좀 크게
-  let gap = random(100, 160);
-  currentX += gap;
-
-  // 화면 우측 여백 넘으면 그만
-  if (currentX > width - margin) break;
-
-  availableX.push(currentX);
+  for (let i = 0; i < flowerCount; i++) {
+    let gap = random(100, 160);
+    currentX += gap;
+    if (currentX > width - margin) break;
+    availableX.push(currentX);
+  }
 }
-}
+
 function draw() {
   background('#fefaf3');
-
   imageMode(CORNER);
-  image(grassImg, 0, height - 120 - 90, width, 208); // 위로 살짝 올림
+  image(grassImg, 0, height - 120 - 90, width, 208);
 
   for (let f of flowers) {
     f.update();
@@ -99,7 +98,7 @@ function closePopup() {
 class Flower {
   constructor(x, maxHeight, wish, type = 0) {
     this.x = x;
-    this.baseY = random(height - 220, height - 180); // 🌱 텍스트 아래로만 제한
+    this.baseY = random(height - 220, height - 180);
     this.height = 0;
     this.maxHeight = maxHeight;
     this.wish = wish;
@@ -145,20 +144,18 @@ class Flower {
     }
   }
 
- drawFlower(type) {
-  if (flowerImages[type]) {
-    imageMode(CENTER);
-
-    // 화면 너비의 12%, 높이의 10% 비율로 그림
-    let flowerW = width * 0.12;
-    let flowerH = height * 0.15;
-
-    image(flowerImages[type], 0, 0, flowerW, flowerH);
-  } else {
-    fill('#aaa');
-    ellipse(0, 0, 60);
+  drawFlower(type) {
+    if (flowerImages[type]) {
+      imageMode(CENTER);
+      let flowerW = width * 0.12;
+      let flowerH = height * 0.15;
+      image(flowerImages[type], 0, 0, flowerW, flowerH);
+    } else {
+      fill('#aaa');
+      ellipse(0, 0, 60);
+    }
   }
-}
+
   checkClick(mx, my) {
     const flowerWidth = 100;
     const flowerHeight = 100;
@@ -179,13 +176,13 @@ class Particle {
     this.x = x;
     this.y = y;
     this.size = random(16, 24);
-   this.alpha -= 5; // 기존보다 빠르게 사라지게
+    this.alpha = 255;
     this.speed = random(0.5, 1.2);
   }
 
   update() {
     this.y -= this.speed;
-    this.alpha -= 2; // 천천히 사라짐
+    this.alpha -= 2;
   }
 
   display() {
