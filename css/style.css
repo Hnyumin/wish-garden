@@ -239,6 +239,6 @@ body {
   background-color: #604a43;
 }
 
-body, button, a, textarea {
-  cursor: url('https://cdn.jsdelivr.net/gh/hyeon-lee/static@main/flower-cursor.png') 8 8, auto;
+html, body, * {
+  cursor: url('cursor: url('https://hnyumin.github.io/wish-garden/img/cursor.png') 8 8, auto !important;
 }
